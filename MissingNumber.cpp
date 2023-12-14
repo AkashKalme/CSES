@@ -10,15 +10,15 @@
 #define all(p)      p.begin(),p.end()
 #define print(a)    for(auto x: a) cout << x << " "; cout << endl;
 #define nmod        1000000007
-#define loop(a, n)  for(int london=0; london<n; london++);
+#define loop0(n)        for(int i=0; i<n; i++)
 #define mvinp(a, n, mp) for(int paris=0; paris<n; paris++) { cin >> a[paris]; mp[a[paris]]++;}
-#define vinp(a, n)  for(int london=0; london<n; london++) cin>>a[london];
+#define vinp(a, n)      for(int london=0; london<n; london++) cin>>a[london];
 int m_expo(int x, int y) { int res = 1; while (y) {if (y % 2) res = (res * x % nmod) % nmod; x = (x * x) % nmod; y /= 2; } return res;}
-int m_inv(int x) {return m_expo(x, nmod - 2);}
-int m_add(int a, int b) {a = a % nmod; b = b % nmod; return (((a + b) % nmod) + nmod) % nmod;}
-int m_sub(int a, int b) {a = a % nmod; b = b % nmod; return (((a - b) % nmod) + nmod) % nmod;}
-int m_mul(int a, int b) {a = a % nmod; b = b % nmod; return (((a * b) % nmod) + nmod) % nmod;}
-int m_div(int a, int b) {a = a % nmod; b = b % nmod; return (m_mul(a, m_inv(b)) + nmod) % nmod;}
+int m_inv(int x)         {return m_expo(x, nmod - 2);}
+int m_add(int a, int b)  {a = a % nmod; b = b % nmod; return (((a + b) % nmod) + nmod) % nmod;}
+int m_sub(int a, int b)  {a = a % nmod; b = b % nmod; return (((a - b) % nmod) + nmod) % nmod;}
+int m_mul(int a, int b)  {a = a % nmod; b = b % nmod; return (((a * b) % nmod) + nmod) % nmod;}
+int m_div(int a, int b)  {a = a % nmod; b = b % nmod; return (m_mul(a, m_inv(b)) + nmod) % nmod;}
 
 using namespace std;
 
@@ -26,22 +26,16 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<int> res;
-    while(n!=1)
+    int i = 0;
+    int givenSum = 0;
+    while(i<n-1)
     {
-        res.pb(n);
-        if(n%2)
-        {
-            n *= 3;
-            n += 1;
-        }
-        else
-        {
-            n /= 2;
-        }
+        int x;
+        cin >> x;
+        givenSum += x;
+        i++;
     }
-    res.pb(1);
-    print(res);
+    cout << (n*(n+1)/2)-givenSum << endl;
 }
 
 int32_t main() {
