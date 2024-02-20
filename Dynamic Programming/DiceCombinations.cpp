@@ -25,48 +25,42 @@ int nPr(int n, int r)    { return fact(n)/fact(n-r); }
 
 using namespace std;
 
+int solve(int sum, int n, vector<int>& dp)
+{
+	if(sum > n)
+	{
+		return 0;
+	}
+	if(sum==n)
+	{
+		return 1;
+	}
+	if(dp[sum]!=-1)
+	{
+		return dp[sum];
+	}
+	int res = 0;
+	for(int i=1; i<=6; i++)
+	{
+		res += solve(sum+i, n, dp)%nmod;
+	}
+	return dp[sum] = res%nmod;
+}
+
 void solve()
 {
-	int n, m, k;
-	cin >> n >> m >> k;
-	vi a(n);
-	vi b(m);
-	vinp(a, n);
-	vinp(b, m);
-	sort(all(a));
-	sort(all(b));
-	int i = 0;
-	int j = 0;
-	int res = 0;
-	while(i<n && j<m)
-	{
-		if(abs(a[i]-b[j])<=k)
-		{
-			res++;
-			i++;
-			j++;
-		}
-		else
-		{
-			if(a[i]>b[j])
-			{
-				j++;
-			}
-			else
-			{
-				i++;
-			}
-		}
-	}
-	cout << res << "\n";
+	int n;
+	cin >> n;
+	vector<int> dp(n+1, -1);
+	cout << solve(0, n, dp) << "\n";
 }
 
 int32_t main() {
 	// your code goes here
-	// #ifndef ONLINE_JUDGE
-    //     freopen("input.txt", "r", stdin);
-    //     freopen("output.txt", "w", stdout);
-    // #endif
+	#ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 	ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
